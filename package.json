@@ -1,0 +1,19 @@
+{
+  "name": "intro-js",
+  "version": "1.0.0",
+  "description": "En este curso aprendermos a trabajar con JavaScript como lenguaje de programación.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@gitlab.keepcoding.io:keepcoding-bootcamps/full-stack-web-bootcamp-x/introducion-a-js.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "type": "module"
+}
