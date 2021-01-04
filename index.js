@@ -5,8 +5,23 @@ const ROUNDS= 4
 const nextRoundTeams= new KnockoutRounds;
 
 
-for (let i=0;i<ROUNDS;i++){
-    const nextRound = new FinalsRoundsMatches('World Cup', nextRoundTeams.listNextRoundTeams) 
+for (let round=0;round<ROUNDS;round++){
+
+    switch(round){
+        case 0:
+            nextRoundTeams.nameRound='OCTAVOS'
+            break
+        case 1:
+            nextRoundTeams.nameRound='CUARTOS'
+            break  
+        case 2:
+            nextRoundTeams.nameRound='SEMIFINALES'
+            break 
+        case 3:
+            nextRoundTeams.nameRound='FINAL'
+            break 
+    }
+    const nextRound = new FinalsRoundsMatches(nextRoundTeams.nameRound, nextRoundTeams.listNextRoundTeams) 
 
     nextRound.scheduleMatchDays()
 // Mostramos por pantala las jornadas y sus partidos
