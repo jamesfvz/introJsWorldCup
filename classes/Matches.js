@@ -16,18 +16,14 @@ export default class Matches{
 
  
     
-        constructor(name, teams=[], config={}) {
+        constructor(name, teams=[]) {
             this.name = name
             this.matchDaySchedule = []
-            this.setup(config)
+            
             this.setupTeams(teams)
             this.summaries = []
         }
     
-        setup(config) {
-            const defaultConfig = { rounds: 1 }
-            this.config = Object.assign(defaultConfig, config)
-        }
     
         setupTeams(teamNames) {
             this.teams = []
