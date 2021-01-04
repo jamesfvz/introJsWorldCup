@@ -57,7 +57,6 @@ export default class KnockoutRounds{
 
    
     })
-    //console.table(summary.standings)
 })
 
     }
