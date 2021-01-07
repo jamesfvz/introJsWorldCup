@@ -1,9 +1,10 @@
 import { octavosTeams } from '../teams.js'
+import {classified} from '../index.js'
 export default class KnockoutRounds{
 
     constructor() {
         this.nameRound
-        this.listNextRoundTeams =  octavosTeams
+        this.listNextRoundTeams =  classified
     }
 
     showTeamsKnockout (teams){
