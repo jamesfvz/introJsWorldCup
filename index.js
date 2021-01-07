@@ -4,6 +4,9 @@ import KnockoutRounds from './classes/KnockoutRounds.js'
 const ROUNDS= 4
 const nextRoundTeams= new KnockoutRounds;
 
+console.log ('============================================')
+console.log ('=== COMIENZO DE LA FASE DE ELIMINATORIAS ===')
+console.log ('============================================')
 
 for (let round=0;round<ROUNDS;round++){
 
@@ -33,8 +36,8 @@ for (let round=0;round<ROUNDS;round++){
 
 }
 
-console.log (' --------GANADOR---------')
-console.log (nextRoundTeams.listNextRoundTeams[0])
+console.log ('================= GANADOR ==================')
+console.log (nextRoundTeams.listNextRoundTeams[0] + ' es campeona del mundo')
 
 
 

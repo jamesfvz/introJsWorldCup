@@ -12,10 +12,9 @@ Array.prototype.shuffle = function()
     }
     export const LOCAL_TEAM = 0
     export const AWAY_TEAM = 1
-export default class Matches{
 
- 
-    
+    export default class Matches{
+
         constructor(name, teams=[]) {
             this.name = name
             this.matchDaySchedule = []

@@ -24,13 +24,16 @@ export default class KnockoutRounds{
             console.log(`----- RESULTADOS ${this.nameRound} -----`) 
             this.listNextRoundTeams=[]
     summary.results.forEach(result => {
-        console.log(`${result.homeTeam} ${result.homeGoals} - ${result.awayGoals} ${result.awayTeam}`)
+        //console.log(`${result.homeTeam} ${result.homeGoals} - ${result.awayGoals} ${result.awayTeam}`)
         
-        if (result.homeGoals>result.awayGoals)
+        if (result.homeGoals>result.awayGoals){
+        console.log(`${result.homeTeam} ${result.homeGoals} - ${result.awayGoals} ${result.awayTeam} =>  ${result.homeTeam}`)
         this.listNextRoundTeams.push(result.homeTeam)
-        else
+        }
+        else{
+        console.log(`${result.homeTeam} ${result.homeGoals} - ${result.awayGoals} ${result.awayTeam} =>  ${result.awayTeam}`)
         this.listNextRoundTeams.push(result.awayTeam)
-
+        }
    
     })
 })
