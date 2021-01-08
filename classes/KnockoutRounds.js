@@ -1,4 +1,3 @@
-import { octavosTeams } from '../teams.js'
 import {classified} from '../index.js'
 export default class KnockoutRounds{
 

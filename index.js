@@ -138,7 +138,7 @@ for (let round = 0; round < ROUNDS; round++) {
     nextRoundTeams.listNextRoundTeams
   );
 
-  nextRound.scheduleMatchDays();
+  nextRound.scheduleMatchDaysMatches();
   // Mostramos por pantala las jornadas y sus partidos
   nextRoundTeams.showTeamsKnockout(nextRound.matchDaySchedule);
   // Comenzamos la liga

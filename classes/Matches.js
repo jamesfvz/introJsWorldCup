@@ -1,17 +1,5 @@
-Array.prototype.shuffle = function()
-    {
-        var i = this.length;
-        while (i)
-        {
-            var j = Math.floor(Math.random() * i);
-            var t = this[--i];
-            this[i] = this[j];
-            this[j] = t;
-        }
-        return this;
-    }
-    export const LOCAL_TEAM = 0
-    export const AWAY_TEAM = 1
+import { LOCAL_TEAM, AWAY_TEAM } from './League.js'
+import {setLocalTeamsConfig} from './LocalAwaysTeams.js'
 
     export default class Matches{
 
@@ -37,7 +25,7 @@ Array.prototype.shuffle = function()
     
 
     
-        initSchedule(round) {
+        initScheduleMatches(round) {
 
             const numberOfMatchesPerMatchDay = this.teams.length / 2
            
@@ -66,18 +54,7 @@ Array.prototype.shuffle = function()
     
         setLocalTeams(round) {
             const teamNames = this.getTeamNamesForSchedule()
-            const maxHomeTeams = teamNames.length - 2
-            let teamIndex = 0
-            round.forEach(matchDay => { // por cada jornada
-                matchDay.forEach(match => { // por cada partido de cada jornada
-                    // establecer el equipo local
-                    match[LOCAL_TEAM] = teamNames[teamIndex]
-                    teamIndex++
-                    if (teamIndex > maxHomeTeams) {
-                        teamIndex = 0
-                    }
-                })
-            })
+            setLocalTeamsConfig(round,teamNames)
             
         }
     
@@ -99,7 +76,7 @@ Array.prototype.shuffle = function()
     
 
     
-        scheduleMatchDays() {
+        scheduleMatchDaysMatches() {
             
                 const newRound = this.createRound()
                 this.matchDaySchedule = this.matchDaySchedule.concat(newRound)
@@ -109,7 +86,7 @@ Array.prototype.shuffle = function()
         createRound() {
            
             const newRound = []
-            this.initSchedule(newRound)
+            this.initScheduleMatches(newRound)
             this.setLocalTeams(newRound)
             this.setAwayTeams(newRound)
             return newRound
@@ -128,7 +105,7 @@ Array.prototype.shuffle = function()
                         result = this.play(match)
                     }  
                     
-                    this.updateTeams(result)  // actualizamos los equipos con el resultado de partido
+                    this.updateTeamsMatches(result)  // actualizamos los equipos con el resultado de partido
                     matchDaySummary.results.push(result)
                     
                 }
@@ -140,7 +117,7 @@ Array.prototype.shuffle = function()
     
   
     
-        updateTeams(result) {
+        updateTeamsMatches(result) {
             // buscar el equipo por su nombre en el array de equipos
             const homeTeam = this.getTeamForName(result.homeTeam)
             const awayTeam = this.getTeamForName(result.awayTeam)
@@ -151,18 +128,6 @@ Array.prototype.shuffle = function()
                 homeTeam.goalsAgainst += result.awayGoals
                 awayTeam.goalsFor += result.awayGoals
                 awayTeam.goalsAgainst += result.homeGoals
-    
-                // if (result.homeGoals > result.awayGoals) { // gana equipo local
-                //     homeTeam.points += this.config.pointsPerWin
-                //     homeTeam.matchesWon += 1
-                //     awayTeam.points += this.config.pointsPerLose
-                //     awayTeam.matchesLost += 1
-                // } else if (result.homeGoals < result.awayGoals) { // gana equipo visitante
-                //     homeTeam.points += this.config.pointsPerLose
-                //     homeTeam.matchesLost += 1
-                //     awayTeam.points += this.config.pointsPerWin
-                //     awayTeam.matchesWon += 1
-                // }
             }
         }
 

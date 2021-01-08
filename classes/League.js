@@ -11,6 +11,8 @@
 	return this;
 }
 
+
+import {setLocalTeamsConfig,fixLastTeamScheduleConfig} from './LocalAwaysTeams.js'
 export const LOCAL_TEAM = 0
 export const AWAY_TEAM = 1
 
@@ -75,29 +77,9 @@ export default class League {
         }
     }
 
-    setLocalTeams(round) {
+     setLocalTeams(round) {
         const teamNames = this.getTeamNamesForSchedule()
-        const maxHomeTeams = teamNames.length - 2
-        let teamIndex = 0
-        round.forEach(matchDay => { // por cada jornada
-            matchDay.forEach(match => { // por cada partido de cada jornada
-                // establecer el equipo local
-                match[LOCAL_TEAM] = teamNames[teamIndex]
-                teamIndex++
-                if (teamIndex > maxHomeTeams) {
-                    teamIndex = 0
-                }
-            })
-        })
-        /* Este código sería el equivalente al superior usando bucles clásicos
-        for (let i = 0; i < this.matchDaySchedule.length; i++) {
-            const matchDay = this.matchDaySchedule[i]
-            for (let j = 0; j < matchDay.length; j++) {
-                const match = matchDay[j]
-                // establecer equipo local
-            }
-        }
-        */
+        setLocalTeamsConfig(round,teamNames)
     }
 
     setAwayTeams(round) {
@@ -121,36 +103,22 @@ export default class League {
     }
 
     fixLastTeamSchedule(round) {
-        let matchDayNumber = 1
         const teamNames = this.getTeamNamesForSchedule()
-        const lastTeamName = teamNames[teamNames.length - 1]
-        round.forEach(matchDay => {
-            const firstMatch = matchDay[0]
-            if (matchDayNumber % 2 == 0) { // si jornada par -> juega en casa
-                firstMatch[AWAY_TEAM] = firstMatch[LOCAL_TEAM]
-                firstMatch[LOCAL_TEAM] = lastTeamName
-            } else { // jornada impar -> juega fuera
-                firstMatch[AWAY_TEAM] = lastTeamName
-            }
-            matchDayNumber++
-        })
+        fixLastTeamScheduleConfig(round,teamNames)
     }
 
     scheduleMatchDays() {
-        for (let i = 0; i < this.config.rounds; i++) {
             const newRound = this.createRound()
-            // si la jornada es par, invertir partidos
-            if (i % 2 != 0) {
+            // si la jornada es par, invertir partidos          
                 for (const matchDay of newRound) {
                     for (const match of matchDay) {
                         const localTEam = match[LOCAL_TEAM]
                         match[LOCAL_TEAM] = match[AWAY_TEAM]
                         match[AWAY_TEAM] = localTEam
                     }
-                }
-            }
+                }         
             this.matchDaySchedule = this.matchDaySchedule.concat(newRound)
-        }
+        
     }
 
     createRound() {
@@ -163,23 +131,7 @@ export default class League {
         return newRound
     }
 
-    scheduleMatchDays2() {
-        const newRound = this.createRound()
-        const i = 1
-        this.matchDaySchedule = this.matchDaySchedule.concat(newRound)
-        const secondRound = this.matchDaySchedule.map(matchDay => {
-            return matchDay.map(match => {
-                const newMatch = [...match]
-                if (i % 2 != 0) {
-                    const localTEam = newMatch[LOCAL_TEAM]
-                    newMatch[LOCAL_TEAM] = newMatch[AWAY_TEAM]
-                    newMatch[AWAY_TEAM] = localTEam
-                }
-                return newMatch
-            })
-        })
-        this.matchDaySchedule = this.matchDaySchedule.concat(secondRound)
-    }
+
 
     start() {
         for (const matchDay of this.matchDaySchedule) {
