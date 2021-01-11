@@ -1,5 +1,4 @@
 import League from './League.js'
-import { LOCAL_TEAM, AWAY_TEAM } from './League.js'
 
 export default class PointsBasedLeague extends League {
     constructor(name, teams=[], config={}) {
@@ -18,10 +17,7 @@ export default class PointsBasedLeague extends League {
 
     customizeTeam(teamName) {
         const customizedTeam = super.customizeTeam(teamName)
-        // customizedTeam.points = 0
-        // customizedTeam.goalsFor = 0
-        // customizedTeam.goalsAgainst = 0
-        // return customizedTeam
+
         return {
             points: 0,
             goalsFor: 0,
@@ -30,20 +26,7 @@ export default class PointsBasedLeague extends League {
         }
     }
 
-    generateGoals() {
-        return Math.round(Math.random() * 10)
-    }
-
-    play(match) {
-        const homeGoals = this.generateGoals()
-        const awayGoals = this.generateGoals()
-        return {
-            homeTeam: match[LOCAL_TEAM],
-            homeGoals,
-            awayTeam: match[AWAY_TEAM],
-            awayGoals
-        }
-    }
+    
 
     getTeamForName(name) {
         return this.teams.find(team => team.name == name)

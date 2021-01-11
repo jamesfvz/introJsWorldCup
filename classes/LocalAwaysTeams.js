@@ -1,4 +1,4 @@
-    export {setLocalTeamsConfig, fixLastTeamScheduleConfig}
+    export {setLocalTeamsConfig, fixLastTeamScheduleConfig,play}
     import { LOCAL_TEAM, AWAY_TEAM } from './League.js'
    
 
@@ -17,7 +17,6 @@
         })
     }
 
-
     function fixLastTeamScheduleConfig(round,teamNames) {
         let matchDayNumber = 1
         const lastTeamName = teamNames[teamNames.length - 1]
@@ -31,4 +30,19 @@
             }
             matchDayNumber++
         })
+    }
+
+    function generateGoals() {
+        return Math.round(Math.random() * 10)
+    }
+
+    function play(match) {
+        const homeGoals = generateGoals()
+        const awayGoals = generateGoals()
+        return {
+            homeTeam: match[LOCAL_TEAM],
+            homeGoals,
+            awayTeam: match[AWAY_TEAM],
+            awayGoals
+        }
     }

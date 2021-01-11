@@ -12,7 +12,7 @@
 }
 
 
-import {setLocalTeamsConfig,fixLastTeamScheduleConfig} from './LocalAwaysTeams.js'
+import {setLocalTeamsConfig,fixLastTeamScheduleConfig,play} from './LocalAwaysTeams.js'
 export const LOCAL_TEAM = 0
 export const AWAY_TEAM = 1
 
@@ -140,7 +140,7 @@ export default class League {
                 standings: undefined
             }
             for (const match of matchDay) {
-                const result = this.play(match)
+                const result = play(match)
                 this.updateTeams(result)  // actualizamos los equipos con el resultado de partido
                 matchDaySummary.results.push(result)
             }
@@ -156,12 +156,6 @@ export default class League {
         throw new Error('getStandings not implemented')
     }
 
-    updateTeams(result) {
-        throw new Error('updateTeams method not implemented')
-    }
-
-    play(match) {
-        throw new Error('play method not implented')
-    }
+    
 
 }

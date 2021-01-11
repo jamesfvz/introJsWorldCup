@@ -1,12 +1,11 @@
-import { LOCAL_TEAM, AWAY_TEAM } from './League.js'
-import {setLocalTeamsConfig} from './LocalAwaysTeams.js'
+import { AWAY_TEAM } from './League.js'
+import {setLocalTeamsConfig,play} from './LocalAwaysTeams.js'
 
     export default class Matches{
 
         constructor(name, teams=[]) {
             this.name = name
             this.matchDaySchedule = []
-            
             this.setupTeams(teams)
             this.summaries = []
         }
@@ -100,9 +99,9 @@ import {setLocalTeamsConfig} from './LocalAwaysTeams.js'
                     standings: undefined
                 }
                 for (const match of matchDay) {
-                    let result = this.play(match)
+                    let result = play(match)
                     while(result.homeGoals == result.awayGoals){
-                        result = this.play(match)
+                        result = play(match)
                     }  
                     
                     this.updateTeamsMatches(result)  // actualizamos los equipos con el resultado de partido
@@ -135,20 +134,5 @@ import {setLocalTeamsConfig} from './LocalAwaysTeams.js'
             return this.teams.find(team => team.name == name)
         }
 
-        play(match) {
-            const homeGoals = this.generateGoals()
-            const awayGoals = this.generateGoals()
-            return {
-                homeTeam: match[LOCAL_TEAM],
-                homeGoals,
-                awayTeam: match[AWAY_TEAM],
-                awayGoals
-            }
-        }
-    
-  
-    
-    generateGoals() {
-        return Math.round(Math.random() * 10)
-    }
+        
 }
